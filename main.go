@@ -23,12 +23,12 @@ func main() {
 		go checkLinkStatus(link, c)
 	}
 
-	for {
+	for l := range c {
 
-		go func() {
+		go func(link string) {
 			time.Sleep(5 * time.Second)
-			checkLinkStatus(<-c, c)
-		}()
+			checkLinkStatus(link, c)
+		}(l)
 	}
 
 }
